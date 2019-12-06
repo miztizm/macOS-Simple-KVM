@@ -1,7 +1,5 @@
 # checkra1n на Linux через QEMU IOMMU Pass Through USB Controller
 
-## [У vmra1n более четкие инструкции на эту тему](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)
-
 ## Требования и клон скрипта (Ubuntu 18.04)
 
 `wget https://raw.githubusercontent.com/miztizm/macOS-Simple-KVM/master/install.sh -v -O install.sh; chmod +x install.sh; ./install.sh`
@@ -93,6 +91,8 @@ sudo ./driverctl/driverctl --nosave set-override 0000:00:14.3 vfio-pci
 sudo ./driverctl/driverctl --nosave set-override 0000:00:14.5 vfio-pci`
 
 
-# Подключите ваш iPhone/iPad/iPod и запустите checkra1in! Ня, Apple!
+# Подключите ваш iPhone/iPad/iPod и запустите checkra1in и следуйте инструкциям! Ня, Apple!
 
 ## Если вы хотите скачать официальный BaseSystem.dmg для Mac OS, вы можете следовать оригиналу [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM/blob/master/README.md) 
+
+## [Более четкие инструкции на эту тему у vmra1n](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)

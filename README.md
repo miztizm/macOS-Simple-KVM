@@ -1,78 +1,98 @@
-# checkra1n on Linux via QEMU IOMMU Pass Through USB Controller
+# checkra1n на Linux через QEMU IOMMU Pass Through USB Controller
 
-## [vmra1n provides clearer instructions](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)
+## [У vmra1n более четкие инструкции на эту тему](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)
 
-## Requirements and Clone script (Ubuntu 18.04)
+## Требования и клон скрипта (Ubuntu 18.04)
 
-`wget https://raw.githubusercontent.com/downthecrop/macOS-Simple-KVM/master/install.sh -v -O install.sh; chmod +x install.sh; ./install.sh`
+`wget https://raw.githubusercontent.com/miztizm/macOS-Simple-KVM/master/install.sh -v -O install.sh; chmod +x install.sh; ./install.sh`
 
-## Check to see if processor virtualization is enabled
+## Проверьте, если виртуализация процессора включена
 
 `dmesg | grep -E "DMAR|IOMMU"`
 
-if no output then enable virtulization in BIOS
+Если пустой вывод, то включите виртуализацию (virtualization) в BIOS 
 
-## Get USB ID's
+## Вывести USB ID's
 
 `lspci -nn | grep -i USB`
 
-## Record the first number for QEMU, the second for GRUB.
+## Запишите первые цифры (XX:XX.XX) для QEMU, вторые для GRUB (XXXX:XXXX).
 
 `00:14.0 USB controller [0c03]: Intel Corporation Cannon Lake PCH USB 3.1 xHCI Host Controller [8086:a36d] (rev 10)`
 
-## Add the second number to grub. [8086:a36d]
+Числа могут отличаться и у всех разные.
+
+## Добавьте вторые числа в grub. (XXXX:XXXX)
 
 `sudo gedit /etc/default/grub`
 
 Intel
 
-`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt intel_iommu=on vfio-pci.ids=XXXX:XXXX"`
+`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt intel_iommu=on vfio-pci.ids=8086:a36d"` 
 
 AMD
 
-`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt amd_iommu=on vfio-pci.ids=XXXX:XXXX"`
+`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt amd_iommu=on vfio-pci.ids=8086:a36d"` 
 
-## Update GRUB
+## Обновитe GRUB
 
 `sudo update-grub`
 
-## Reboot
+## Перезагрузка
 
 `sudo reboot`
 
-## Check if vfio is enabled
+## Посмотрите если vfio включен
 
 `dmesg | grep -i vfio`
 
-## Change Configuration Files
+##  Изменить файлы конфигурации (XX:XX.XX)
 
-Uncomment bottom lines from `macOS.sh` using the first number from the `lspci -nn | grep -i USB` device you passed through
+Отредактируйте нижнию строку в `macOS.sh` и замените число на `00:14.0`
 
-edit `USBmacOS.sh` using the first number from the `lspci -nn | grep -i USB` device you passed through
+`-device vfio-pci,host=00:14.0,bus=port.1,multifunction=on`
 
-## Make sure you have macOS.qcow2 in the folder.
+Отредактируйте `USBmacOS.sh` и замените число на `00:14.0` (Три нуля, нужно оставить)
 
-Download macOS.7z Virtual Disk Image: https://drive.google.com/open?id=1EnbopO0On4vZN7X_8zPr-k4EjCTuoQLM
+`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.0 vfio-pci`
 
-Mirror1: https://mega.nz/#!dJUiUYiB!tnW7nM-oXXfyUs6EPYMLLLzXXauPqlLsB8b_gPs28Dc
+## Убедитесь, что у вас есть macOS.qcow2 в папке.
 
-Mirror2: https://mega.nz/#!wNZQQYrQ!CZ_Y8ysRIHYMcbOsh3kEAwi-m4g90mAc7vAV_q1Od8U
+Образ виртуального диска macOS.7z (С предустановленным checkra1n beta 0.9.6) 
+Загрузить: https://drive.google.com/open?id=1EnbopO0On4vZN7X_8zPr-k4EjCTuoQLM
 
-Note: The VM has NO password. If you need a password to run commands go to System Preferences and replace the empty password on the checkra1n account.
+Заметка: Виртуальная машина не имеет пароля. Если вам нyжно изменить паролья, для ввода комманд.
 
-### Extract macOS.7z to your macOS-Simple-KVM folder
+`sudo passwd checkra1n`
 
-## Execute the Virtual Machine and Pass through PCI USB Controller
+### Извлеките macOS.7z в вашу папку macOS-Simple-KVM
+
+`sudo apt-get install dtrx`
+`dtrx macOS.7z`
+
+## Запустите виртуальную машину и привязка USB-контроллера
 
 `sudo ./USBmacOS.sh`
 
-Note: if you get an issue like `qemu-system-x86_64: -device vfio-pci,host=00:14.0,bus=port.1,multifunction=on: vfio error: 0000:00:14.0: group 4 is not viable
+Заметка: если у вас ошибка `qemu-system-x86_64: -device vfio-pci,host=00:14.0,bus=port.1,multifunction=on: vfio error: 0000:00:14.0: group 4 is not viable
 Please ensure all devices within the iommu_group are bound to their vfio bus driver.`
 
-You need to unbind multiple groups: https://www.reddit.com/r/jailbreak/comments/dvolsy/comment/f7ei2tp
-### vmra1n unbind and resolve this https://github.com/foxlet/vmra1n
+### Добовляем связанные usb девайсы (XX:XX.XX)
+
+Вам нужно заново перепривязать из группы вашего контролера, все остальные от него связанные подключения.
+Смотрим список:
+
+`lspci -nn`
+
+Найдите 00:14.0 После него должны быть и другие ( 00:14.2, 00:14.3, 00:14.5 )
+
+Отредактируйте `USBmacOS.sh` добавьте после первой строчки другие девайсы:
+
+`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.2 vfio-pci
+sudo ./driverctl/driverctl --nosave set-override 0000:00:14.3 vfio-pci
+sudo ./driverctl/driverctl --nosave set-override 0000:00:14.5 vfio-pci`
 
 
-# Plug in your iPhone/iPad/iPod and run the tool! checkm8 Apple!
+# Подключите ваш iPhone/iPad/iPod и запустите checkra1in! Ня, Apple!
 
-## If you'd rather download the offical BaseSystem.dmg of macOS you can follow the original [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM/blob/master/README.md) instructions for downloading and setup.
+## Если вы хотите скачать официальный BaseSystem.dmg для Mac OS, вы можете следовать оригиналу [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM/blob/master/README.md) 

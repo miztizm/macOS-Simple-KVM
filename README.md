@@ -67,6 +67,7 @@ AMD
 ### Извлеките macOS.7z в вашу папку macOS-Simple-KVM
 
 `sudo apt-get install dtrx`
+
 `dtrx macOS.7z`
 
 ## Запустите виртуальную машину и привязка USB-контроллера
@@ -87,9 +88,11 @@ Please ensure all devices within the iommu_group are bound to their vfio bus dri
 
 Отредактируйте `USBmacOS.sh` добавьте после первой строчки другие девайсы:
 
-`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.2 vfio-pci
-sudo ./driverctl/driverctl --nosave set-override 0000:00:14.3 vfio-pci
-sudo ./driverctl/driverctl --nosave set-override 0000:00:14.5 vfio-pci`
+`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.2 vfio-pci`
+
+`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.3 vfio-pci`
+
+`sudo ./driverctl/driverctl --nosave set-override 0000:00:14.5 vfio-pci`
 
 
 # Подключите ваш iPhone/iPad/iPod и запустите checkra1in и следуйте инструкциям! Ня, Apple!

@@ -57,7 +57,8 @@ AMD
 ## Убедитесь, что у вас есть macOS.qcow2 в папке.
 
 Образ виртуального диска macOS.7z (С предустановленным checkra1n beta 0.9.6) 
-Загрузить: https://drive.google.com/open?id=1EnbopO0On4vZN7X_8zPr-k4EjCTuoQLM
+
+Загрузить: https://drive.google.com/open?id=1h_Yrqkasg9oln0BrnZfZKSraAtPTC_Jv
 
 Заметка: Виртуальная машина не имеет пароля. Если вам нyжно изменить паролья, для ввода комманд.
 

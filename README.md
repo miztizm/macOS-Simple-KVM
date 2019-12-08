@@ -1,6 +1,6 @@
 # checkra1n на Linux через QEMU IOMMU Pass Through USB Controller
 
-## Требования и клон скрипта (Ubuntu 18.04)
+## Зависимости и клон скрипта (Ubuntu 18.04)
 
 `wget https://raw.githubusercontent.com/miztizm/macOS-Simple-KVM/master/install.sh -v -O install.sh; chmod +x install.sh; ./install.sh`
 

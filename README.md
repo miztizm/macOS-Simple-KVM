@@ -102,5 +102,7 @@ Please ensure all devices within the iommu_group are bound to their vfio bus dri
 ## [Более четкие инструкции на эту тему у vmra1n](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)
 
 ### Кредиты
-[downthecrop](https://github.com/downthecrop/), [foxlet](https://github.com/foxlet/) и [checkrain](https://checkra.in/) 
+[checkra1n](https://checkra.in/)  (C) 2019 Kim Jong Cracks. Development by qwertyoruiop, axi0mx, al.
+[downthecrop](https://github.com/downthecrop/), [foxlet](https://github.com/foxlet/)
+Thanks to the creator of OSX-KVM and all contributors.
 

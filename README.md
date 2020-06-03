@@ -97,6 +97,8 @@ Please ensure all devices within the iommu_group are bound to their vfio bus dri
 
 # Подключите ваш iPhone/iPad/iPod и запустите checkra1in и следуйте инструкциям! Ня, Apple!
 
+## Вышел официальный linux релиз https://checkra.in/
+
 ## Если вы хотите скачать официальный BaseSystem.dmg для Mac OS, вы можете следовать оригиналу [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM/blob/master/README.md) 
 
 ## [Более четкие инструкции на эту тему у vmra1n](https://www.reddit.com/r/jailbreak/comments/dxdmua/tutorial_detailed_guide_on_how_to_run_checkra1n/)

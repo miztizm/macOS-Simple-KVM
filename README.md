@@ -58,7 +58,12 @@ AMD
 
 Образ виртуального диска macOS.7z (С предустановленным checkra1n beta 0.9.6) 
 
-Загрузить: https://drive.google.com/open?id=1h_Yrqkasg9oln0BrnZfZKSraAtPTC_Jv
+Загрузить: 
+- https://mirrorace.org/m/52MbB
+- https://multiup.org/8a1857fcae4fc77c55b07b40eb48bd9c
+- https://go4up.com/dl/a75e1cc5164ea5/[MIZTIZM]_macOS.7z
+- https://drive.google.com/file/d/1EnbopO0On4vZN7X_8zPr-k4EjCTuoQLM/
+
 
 Заметка: Виртуальная машина не имеет пароля. Если вам нyжно изменить паролья, для ввода комманд.
 
